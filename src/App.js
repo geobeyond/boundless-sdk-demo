@@ -4,16 +4,23 @@ import './App.css';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import SdkMap from '@boundlessgeo/sdk/components/map';
+import SdkZoomControl from '@boundlessgeo/sdk/components/map/zoom-control';
+import SdkZoomSlider from '@boundlessgeo/sdk/components/map/zoom-slider';
 import SdkMapReducer from '@boundlessgeo/sdk/reducers/map';
 import * as SdkMapActions from '@boundlessgeo/sdk/actions/map';
 
+import '@boundlessgeo/sdk/stylesheet/sdk.scss';
+
 const store = createStore(combineReducers({
   'map': SdkMapReducer,
-}));
+}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 class App extends Component {
 
   componentDidMount() {
+    // start in the middle of america
+    store.dispatch(SdkMapActions.setView([12, 40], 4));
+
 	  // add the OSM source
 	  store.dispatch(SdkMapActions.addSource('osm', {
 		type: 'raster',
@@ -51,7 +58,10 @@ class App extends Component {
         </header>
         <div>
 			    <Provider store={store}>
-            <SdkMap />
+            <SdkMap>
+              <SdkZoomControl style={{position: 'absolute', top: 10, left: 14}} />
+              <SdkZoomSlider />
+            </SdkMap>
           </Provider>
 		    </div>
       </div>
