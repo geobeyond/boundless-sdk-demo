@@ -23,20 +23,37 @@ class App extends Component {
 
 	  // add the OSM source
 	  store.dispatch(SdkMapActions.addSource('osm', {
-		type: 'raster',
-		tileSize: 256,
-		tiles: [
-		  'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
-		  'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png',
-		  'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png',
-		],
+      type: 'raster',
+      tileSize: 256,
+      tiles: [
+        'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      ],
 	  }));
 
 	  // add an OSM layer
 	  store.dispatch(SdkMapActions.addLayer({
-		id: 'osm',
-		source: 'osm',
-	  }));
+      id: 'osm',
+      source: 'osm',
+    }));
+
+    // add static geojson layer
+    store.dispatch(SdkMapActions.addSource('varchi', {
+      type: 'geojson',
+      data: 'https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/peterampazzo/OpenData-Padova/master/geojson/varchi.geojson'
+    }));
+
+    store.dispatch(SdkMapActions.addLayer({
+      id: 'varchi',
+      source: 'varchi',
+      type: 'circle',
+      paint: {
+        'circle-radius': 10,
+        'circle-color': '#756bb1',
+        'circle-stroke-color': '#756bb1',
+      },
+    }));
 	}
 
   render() {
