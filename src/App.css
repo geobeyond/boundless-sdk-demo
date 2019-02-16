@@ -33,3 +33,7 @@
     transform: rotate(360deg);
   }
 }
+
+div.sdk-popup-content {
+  width: 140px;
+}
