@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import SdkMap from '@boundlessgeo/sdk/components/map';
 import SdkZoomControl from '@boundlessgeo/sdk/components/map/zoom-control';
 import SdkZoomSlider from '@boundlessgeo/sdk/components/map/zoom-slider';
+import SdkScaleLine from '@boundlessgeo/sdk/components/map/scaleline';
 import SdkMapReducer from '@boundlessgeo/sdk/reducers/map';
 import SdkPopup from '@boundlessgeo/sdk/components/map/popup';
 import * as SdkMapActions from '@boundlessgeo/sdk/actions/map';
@@ -51,6 +52,7 @@ class App extends Component {
 	  store.dispatch(SdkMapActions.addSource('osm', {
       type: 'raster',
       tileSize: 256,
+      attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
       tiles: [
         'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
         'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -131,6 +133,7 @@ class App extends Component {
                 });
               }}
             >
+              <SdkScaleLine />
               <SdkZoomControl style={{position: 'absolute', top: 10, left: 14}} />
               <SdkZoomSlider />
             </SdkMap>
