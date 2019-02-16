@@ -82,6 +82,20 @@ class App extends Component {
         'circle-stroke-color': '#756bb1',
       },
     }));
+
+    // add the wms source
+    store.dispatch(SdkMapActions.addSource('states', {
+      type: 'raster',
+      tileSize: 256,
+      tiles: ['https://demo.boundlessgeo.com/geoserver/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image/png&SRS=EPSG:900913&LAYERS=topp:states&STYLES=&WIDTH=256&HEIGHT=256&BBOX={bbox-epsg-3857}'],
+    }));
+
+    // add the wms layer
+    store.dispatch(SdkMapActions.addLayer({
+      id: 'states',
+      source: 'states',
+      type: 'raster',
+    }));
 	}
 
   render() {
