@@ -1,7 +1,8 @@
 {
   "name": "boundless-sdk-demo",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "homepage": "https://boundless-sdk-demo.surge.sh",
   "dependencies": {
     "@boundlessgeo/sdk": "^2.7.5",
     "babel-cli": "^6.26.0",
